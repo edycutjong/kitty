@@ -2,15 +2,14 @@
   <img src="docs/icon-animated.svg" width="144" height="144" alt="The Kitty">
   <h1>The Kitty 🐱⚽</h1>
   <p><em>The serverless, self-custodial prediction pot with no house.</em></p>
-  <img src="docs/readme-hero.png" alt="The Kitty — no server, no house, no custodian" width="100%">
+  <img src="docs/readme-hero-animated.svg" alt="The Kitty — no server, no house, no custodian" width="100%">
 
   <br/>
 
-  [![CI/CD Pipeline](https://github.com/edycutjong/kitty/actions/workflows/ci.yml/badge.svg)](https://github.com/edycutjong/kitty/actions/workflows/ci.yml)
-
-  [![Watch the 3-min demo](https://img.shields.io/badge/Watch_the_3--min_demo-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/Rx59vsOlg7Q)
+  [![Watch the 3-min demo](https://img.shields.io/badge/Demo-Video-EF4444?style=for-the-badge&logo=youtube)](https://youtu.be/Rx59vsOlg7Q)
+  [![Landing](https://img.shields.io/badge/🌐_Landing-Page-26A17B?style=for-the-badge)](https://edycutjong.github.io/kitty/landing)
   [![Pitch deck](https://img.shields.io/badge/Pitch_deck-live-3AC569?style=for-the-badge)](https://edycutjong.github.io/kitty/docs/pitch/)
-
+  
   [![Built for Tether Developers Cup](https://img.shields.io/badge/DoraHacks-Tether_Developers_Cup-8b5cf6?style=for-the-badge)](https://dorahacks.io/hackathon/tether-developers-cup)
   [![Track](https://img.shields.io/badge/Track-Pear_(WDK_supporting)-26A17B?style=for-the-badge)](#-why-only-pear--wdk)
 
@@ -19,8 +18,9 @@
   ![Pear](https://img.shields.io/badge/Pear-Autobase_·_Hypercore_·_Hyperswarm-3AC569?style=flat)
   ![WDK](https://img.shields.io/badge/Tether_WDK-1.0.0--beta.12-26A17B?style=flat)
   ![Node](https://img.shields.io/badge/Node-%E2%89%A520-339933?style=flat&logo=node.js&logoColor=white)
-  ![Tests](https://img.shields.io/badge/tests-227_passing-26A17B?style=flat)
   ![License](https://img.shields.io/badge/License-Apache_2.0-F5C542?style=flat)
+
+  ![Tests](https://img.shields.io/badge/tests-227_passing-26A17B?style=flat)
   [![CI](https://github.com/edycutjong/kitty/actions/workflows/ci.yml/badge.svg)](https://github.com/edycutjong/kitty/actions/workflows/ci.yml)
 
 </div>
