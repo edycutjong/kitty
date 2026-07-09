@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# P2P storage / local state
+storage/
+.kitty/
+*.db
+
+# Wallet secrets — never commit a seed or a sealed-pick salt,
+# no matter which --dir the pot session was created in
+*.seed
+seed.txt
+wallet-seed.txt
+kitty-local-secrets.json
+
+# Test & coverage artifacts
+coverage/
+/test-results/
+
+# Bench output is COMMITTED on purpose — README cites it and judges' clones
+# must contain the artifact. Re-running `npm run bench` refreshes it.
+
+# OS noise
+.DS_Store

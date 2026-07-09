@@ -1,0 +1,76 @@
+{
+  "name": "kitty",
+  "version": "1.0.0",
+  "description": "Serverless, self-custodial USD₮ match-prediction pot — no server, no house, no custodian. Pear (Hypercore/Autobase/Hyperswarm) × Tether WDK.",
+  "license": "Apache-2.0",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edycutjong/kitty.git"
+  },
+  "homepage": "https://edycutjong.github.io/kitty",
+  "bugs": {
+    "url": "https://github.com/edycutjong/kitty/issues"
+  },
+  "main": "index.html",
+  "exports": {
+    ".": "./index.js",
+    "./core": "./src/core/index.js",
+    "./p2p": "./src/p2p/index.js",
+    "./wallet": "./src/wallet/index.js"
+  },
+  "bin": {
+    "kitty": "./bin/kitty.js"
+  },
+  "pear": {
+    "name": "kitty",
+    "gui": {
+      "backgroundColor": "#0B0E11",
+      "width": 1320,
+      "height": 860
+    }
+  },
+  "scripts": {
+    "test": "node --test \"test/**/*.test.js\"",
+    "test:core": "node --test \"test/core/*.test.js\"",
+    "test:p2p": "node --test \"test/p2p/*.test.js\"",
+    "test:wallet": "node --test \"test/wallet/*.test.js\"",
+    "count:tests": "node scripts/count_tests.js",
+    "coverage": "c8 --all --include=\"src/**\" --check-coverage --lines 100 --functions 100 --branches 100 --reporter=text node --test \"test/**/*.test.js\"",
+    "lint": "standard",
+    "lint:fix": "standard --fix",
+    "bench": "node scripts/bench.js",
+    "verify:p2p": "node scripts/verify_p2p.js",
+    "check:readiness": "node scripts/check_submission_readiness.js",
+    "seed:demo": "node scripts/seed_demo.js",
+    "ci": "npm run lint && npm test && npm run coverage"
+  },
+  "dependencies": {
+    "@tetherto/wdk": "1.0.0-beta.12",
+    "@tetherto/wdk-wallet-solana": "1.0.0-beta.11",
+    "autobase": "^7.28.1",
+    "b4a": "^1.6.7",
+    "compact-encoding": "^2.16.1",
+    "corestore": "^7.11.0",
+    "hyperbee": "^2.27.3",
+    "hypercore-crypto": "^3.6.1",
+    "hyperswarm": "^4.17.0",
+    "protomux": "^3.11.0",
+    "sodium-universal": "^5.0.1",
+    "z32": "^1.1.0"
+  },
+  "devDependencies": {
+    "c8": "^11.0.0",
+    "hyperdht": "^6.32.0",
+    "standard": "^17.1.2"
+  },
+  "standard": {
+    "ignore": [
+      "landing/**",
+      "docs/**"
+    ]
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

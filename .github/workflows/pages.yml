@@ -1,0 +1,69 @@
+name: Deploy landing + pitch to GitHub Pages
+
+# Publishes the site to GitHub Pages with the LANDING page (landing/index.html)
+# as the root; the pitch deck stays reachable at /docs/pitch/. The full repo is
+# uploaded so every page's relative links (icon.svg, assets, ../../landing) resolve.
+#
+# ONE-TIME SETUP: repo Settings -> Pages -> Source = "GitHub Actions".
+# Landing at:  https://edycutjong.github.io/kitty/  (root redirects to landing/)
+# Pitch deck:  https://edycutjong.github.io/kitty/docs/pitch/
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Stage site (root -> landing; keep pitch deck + assets)
+        run: |
+          mkdir -p _site
+          rsync -a \
+            --exclude='.git' --exclude='_site' --exclude='node_modules' \
+            --exclude='coverage' --exclude='.nyc_output' --exclude='.github' \
+            ./ _site/
+          cat > _site/index.html <<'HTML'
+          <!doctype html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>Redirecting to The Kitty…</title>
+            <link rel="canonical" href="./landing/">
+            <meta http-equiv="refresh" content="0; url=./landing/">
+            <script>location.replace('./landing/' + location.search + location.hash);</script>
+          </head>
+          <body>
+            <p><a href="./landing/">Open The Kitty →</a></p>
+          </body>
+          </html>
+          HTML
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

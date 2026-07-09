@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Kitty — Pitch Deck</title>
+<meta name="description" content="The Kitty — the serverless, self-custodial USD₮ prediction pot. Pitch deck: the treasurer problem, the commit-reveal solution, the magic moment, the Pear × WDK stack, and the proof.">
+<meta name="theme-color" content="#0B0E11">
+<link rel="icon" href="../icon.svg" type="image/svg+xml">
+<style>
+  :root{
+    --ground:#0B0E11; --panel:#12161C; --panel-2:#171C24;
+    --line:rgba(245,247,250,.14); --line-soft:rgba(245,247,250,.08);
+    --green:#26A17B; --green-bright:#3DC79A;
+    --gold:#F5C542; --gold-bright:#FFDD7A;
+    --danger:#FF5C5C;
+    --chalk:#F5F7FA; --muted:#9AA4B0; --muted-2:#6B7480;
+    --mono:ui-monospace,"SF Mono",Menlo,"Cascadia Mono","Roboto Mono",monospace;
+    --sans:-apple-system,"SF Pro Display","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --ease:cubic-bezier(.22,1,.36,1);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{
+    background:var(--ground); color:var(--chalk); font-family:var(--sans);
+    -webkit-font-smoothing:antialiased; overflow:hidden;
+  }
+  #bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--green),var(--gold));z-index:50;
+    width:0;transition:width .4s var(--ease)}
+  .deck{position:relative;height:100vh;width:100vw}
+  .slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
+    padding:clamp(28px,6vw,96px);opacity:0;visibility:hidden;
+    transform:translateY(14px);transition:opacity .5s ease,transform .5s ease,visibility .5s;
+    max-width:1120px;margin:0 auto;overflow-y:auto}
+  .slide.active{opacity:1;visibility:visible;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    .slide{transition:opacity .2s;transform:none}
+    #bar{transition:none}
+  }
+  .eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;
+    color:var(--green-bright);margin-bottom:1.4rem;display:flex;align-items:center;gap:.7rem}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--green)}
+  h1{font-family:var(--sans);font-weight:900;line-height:1.04;letter-spacing:-.03em;
+    font-size:clamp(2.4rem,7vw,5.4rem);margin:0;text-wrap:balance}
+  h2{font-family:var(--sans);font-weight:800;line-height:1.08;letter-spacing:-.02em;
+    font-size:clamp(1.7rem,4.4vw,3rem);margin:0 0 1.1rem;text-wrap:balance}
+  p.lead{font-size:clamp(1.02rem,2vw,1.35rem);line-height:1.55;color:var(--chalk);
+    max-width:62ch;margin:.2rem 0}
+  p.sub{color:var(--muted);max-width:64ch;line-height:1.6;font-size:1rem}
+  .g{background:linear-gradient(120deg,#fff 0%,var(--green) 55%,var(--gold) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .money{color:var(--gold-bright)} .safe{color:var(--green-bright)} .bad{color:var(--danger)}
+  strong{color:var(--chalk);font-weight:700}
+  .kicker{font-family:var(--mono);color:var(--muted);letter-spacing:.2em;font-size:.78rem;
+    text-transform:uppercase;margin-bottom:2rem}
+  .badge-line{display:inline-flex;align-items:center;gap:.6rem;margin-top:2rem;font-family:var(--mono);
+    font-size:.82rem;color:var(--green-bright);background:rgba(38,161,123,.1);border:1px solid rgba(38,161,123,.35);
+    padding:.55rem 1rem;border-radius:999px}
+  .tag-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.6rem}
+  .chip{font-family:var(--mono);font-size:.74rem;letter-spacing:.03em;color:var(--muted);
+    border:1px solid var(--line);padding:.35rem .75rem;border-radius:100px;background:var(--panel)}
+  .chip.g{color:var(--green-bright);border-color:#1c4a38}
+  .chip.m{color:var(--gold-bright);border-color:#4a4020}
+  .cols{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(1.4rem,4vw,3.5rem);align-items:center}
+  @media (max-width:760px){.cols{grid-template-columns:1fr;gap:1.6rem}}
+  .term{background:#07100C;border:1px solid var(--line);border-radius:12px;overflow:hidden;
+    box-shadow:0 24px 60px -30px rgba(0,0,0,.8);font-family:var(--mono)}
+  .term .bar{display:flex;gap:.4rem;padding:.7rem .9rem;border-bottom:1px solid var(--line);align-items:center}
+  .term .bar i{width:10px;height:10px;border-radius:50%;background:#262e36;display:block}
+  .term .tt{margin-left:.6rem;color:var(--muted-2);font-size:.7rem;letter-spacing:.08em}
+  .term pre{margin:0;padding:1rem 1.1rem;font-size:clamp(.6rem,1.1vw,.8rem);line-height:1.7;
+    color:var(--chalk);white-space:pre;overflow-x:auto}
+  .c-g{color:var(--green-bright)} .c-m{color:var(--gold-bright)} .c-d{color:var(--muted)} .c-r{color:var(--danger)}
+  .strike{color:var(--danger);text-decoration:line-through;text-decoration-thickness:1.5px}
+  ul.feat{list-style:none;padding:0;margin:1.4rem 0 0;display:flex;flex-direction:column;gap:1.05rem}
+  ul.feat li{display:flex;gap:.9rem;line-height:1.45}
+  ul.feat .mk{font-family:var(--mono);color:var(--green-bright);flex:none;margin-top:.15rem}
+  ul.feat b{display:block;color:var(--chalk);margin-bottom:.15rem;font-weight:700}
+  ul.feat span.d{color:var(--muted);font-size:.95rem}
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2rem}
+  @media (max-width:760px){.grid4{grid-template-columns:repeat(2,1fr)}}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:1.25rem 1.1rem}
+  .stat .n{font-family:var(--mono);font-size:clamp(1.35rem,3.1vw,2.1rem);font-weight:700;
+    letter-spacing:-.01em;color:var(--green-bright);font-variant-numeric:tabular-nums}
+  .stat .n.m{color:var(--gold-bright)}
+  .stat .l{color:var(--muted);font-size:.8rem;margin-top:.4rem;line-height:1.35}
+  .stack{width:100%;border-collapse:collapse;margin-top:1.5rem;font-size:.95rem}
+  .stack td{padding:.85rem .6rem;border-bottom:1px solid var(--line);vertical-align:top}
+  .stack tr td:first-child{font-family:var(--mono);color:var(--green-bright);white-space:nowrap;
+    width:1%;padding-right:1.4rem;letter-spacing:.02em}
+  .stack tr td:last-child{color:var(--muted)}
+  .stack b{color:var(--chalk)}
+  #nav{position:fixed;bottom:22px;right:26px;display:flex;align-items:center;gap:1rem;z-index:40;
+    font-family:var(--mono)}
+  .dots{display:flex;gap:.5rem}
+  .dots button{width:8px;height:8px;border-radius:50%;border:0;background:var(--line);cursor:pointer;
+    padding:0;transition:background .3s,transform .3s}
+  .dots button.on{background:var(--green-bright);transform:scale(1.35)}
+  .dots button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+  .count{color:var(--muted);font-size:.76rem;letter-spacing:.1em;font-variant-numeric:tabular-nums}
+  .arrows{display:flex;gap:.4rem}
+  .arrows button{background:var(--panel);border:1px solid var(--line);color:var(--chalk);
+    width:34px;height:34px;border-radius:8px;cursor:pointer;font-size:1rem;line-height:1;
+    display:flex;align-items:center;justify-content:center;transition:border-color .2s,color .2s}
+  .arrows button:hover{border-color:var(--green);color:var(--green-bright)}
+  .arrows button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+  #hint{position:fixed;bottom:26px;left:26px;color:var(--muted-2);font-family:var(--mono);
+    font-size:.72rem;letter-spacing:.1em;z-index:40}
+  .foot{font-family:var(--mono);color:var(--muted-2);font-size:.76rem;letter-spacing:.08em;
+    margin-top:2.2rem}
+  .foot a{color:var(--muted-2)}
+  a{color:var(--green-bright);text-decoration:none;border-bottom:1px solid #1c4a38}
+  .btns{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2.2rem}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:.8rem;
+    letter-spacing:.02em;color:var(--chalk);background:var(--panel);border:1px solid var(--line);
+    padding:.6rem 1.05rem;border-radius:10px;text-decoration:none;cursor:pointer;
+    transition:border-color .2s,background .2s,transform .2s,box-shadow .2s}
+  .btn:hover{border-color:var(--green);background:#12241B;transform:translateY(-1px)}
+  .btn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+  .btn.primary{background:var(--green);color:#04140E;border-color:var(--green);font-weight:700}
+  .btn.primary:hover{background:var(--green-bright);border-color:var(--green-bright);box-shadow:0 8px 26px rgba(38,161,123,.35)}
+  .btn.gold{border-color:#4a4020;color:var(--gold-bright)}
+  .btn.gold:hover{border-color:var(--gold);background:#241f10}
+  .ledger{display:flex;flex-direction:column;gap:.35rem;margin-top:1.7rem;font-family:var(--mono);font-size:.86rem}
+  .ledger .row{display:grid;grid-template-columns:64px 116px 1fr auto;gap:.9rem;align-items:center;
+    padding:.55rem .8rem;border-radius:8px;background:var(--panel);border:1px solid var(--line-soft);border-left:3px solid var(--line)}
+  .ledger .row.ok{border-left-color:var(--green)}
+  .ledger .row.rej{border-left-color:var(--danger)}
+  .ledger .row.vote{border-left-color:var(--gold)}
+  .ledger .who{color:var(--chalk);font-weight:700}
+  .ledger .verdict{color:var(--muted);font-size:.78rem;text-align:right;white-space:nowrap}
+  .ledger .verdict.ok{color:var(--green-bright)}
+  .ledger .verdict.rej{color:var(--danger)}
+  .ledger .sep{text-align:center;color:var(--muted-2);font-size:.72rem;letter-spacing:.1em;margin:.4rem 0;text-transform:uppercase}
+  .sumline{margin-top:1.1rem;font-family:var(--mono);font-size:.92rem;color:var(--gold-bright);
+    background:rgba(245,197,66,.07);border:1px solid rgba(245,197,66,.28);border-radius:8px;padding:.7rem 1rem}
+  @media (max-width:640px){
+    .ledger .row{grid-template-columns:52px 90px 1fr;grid-template-areas:"who op amt" "verdict verdict verdict";}
+    .ledger .verdict{text-align:left;grid-column:1/-1}
+  }
+  /* ===== presentation layer (added): print · presenter (P) · overview (ESC) · contrast (C) ===== */
+  #pv{position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;
+    padding:18px clamp(20px,5vw,40px) 20px;background:rgba(7,10,14,.93);backdrop-filter:blur(8px);
+    border-top:1px solid var(--line,#243040);font-family:var(--sans);
+    color:var(--chalk,var(--ink,#eaf0f5));line-height:1.5;font-size:clamp(.95rem,1.5vw,1.1rem);
+    max-height:28vh;overflow:auto}
+  body.presenting #pv{display:block}
+  body.presenting #hint{display:none}
+  #pv .pv-n{display:inline-block;font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;
+    color:var(--green-bright,var(--ai-2,var(--cyan,#3DC79A)));margin-right:.9rem;
+    border:1px solid var(--line,#243040);border-radius:6px;padding:.15rem .5rem;vertical-align:middle}
+  #pv b{color:var(--chalk,var(--ink,#fff))}
+  #ov{position:fixed;inset:0;z-index:70;display:none;background:rgba(6,9,12,.97);
+    padding:clamp(24px,5vw,64px);overflow:auto}
+  #ov.on{display:block}
+  #ov h3{font-family:var(--mono);font-size:.76rem;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--muted,#8A94A6);margin:0 0 1.4rem}
+  .ov-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+  .ov-card{text-align:left;cursor:pointer;background:var(--panel,#12161C);
+    border:1px solid var(--line,#243040);border-radius:12px;padding:1rem 1.1rem;
+    color:var(--chalk,var(--ink,#eaf0f5));font-family:var(--sans);display:flex;flex-direction:column;
+    gap:.5rem;transition:border-color .15s,transform .15s}
+  .ov-card:hover,.ov-card:focus-visible{border-color:var(--green-bright,var(--ai-2,var(--cyan,#3DC79A)));
+    transform:translateY(-2px);outline:none}
+  .ov-card .ov-n{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;
+    color:var(--green-bright,var(--ai-2,var(--cyan,#3DC79A)))}
+  .ov-card .ov-eye{font-family:var(--mono);font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--muted,#8A94A6)}
+  .ov-card .ov-t{font-size:1rem;font-weight:600;line-height:1.25}
+  body.debug-contrast .slide.active h1,body.debug-contrast .slide.active h2,
+  body.debug-contrast .slide.active p,body.debug-contrast .slide.active li,
+  body.debug-contrast .slide.active td,body.debug-contrast .slide.active .chip,
+  body.debug-contrast .slide.active .stat,body.debug-contrast .slide.active pre{
+    outline:1px solid rgba(255,64,129,.55);outline-offset:2px}
+  /* Cmd/Ctrl-P → Save as PDF → Landscape → clean 16:9 deck */
+  @media print{
+    @page{size:16in 9in landscape;margin:0}
+    html,body{height:auto;overflow:visible;background:var(--ground,#0B0E11);
+      -webkit-print-color-adjust:exact;print-color-adjust:exact}
+    #bar,#nav,#hint,#pv,#ov{display:none !important}
+    .deck{position:static;height:auto;width:auto}
+    .slide{position:relative !important;inset:auto !important;opacity:1 !important;
+      visibility:visible !important;transform:none !important;min-height:9in;overflow:hidden;
+      page-break-after:always;break-after:page;page-break-inside:avoid;break-inside:avoid;
+      -webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .slide:last-child{page-break-after:auto;break-after:auto}
+  }
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<div class="deck" id="deck">
+
+  <!-- 1 TITLE -->
+  <section class="slide active">
+    <div class="kicker">The Kitty · Tether Developers Cup 2026 · Pear × WDK — Cup Champion</div>
+    <h1>Your mates'<br>sweepstake,<br><span class="g">minus the treasurer.</span></h1>
+    <p class="lead" style="margin-top:1.8rem">A trustless, <strong>serverless</strong> prediction pot: stakes are self-custodial USD₮, picks seal shut before kickoff, and winners split automatically. No server. No house. No custodian.</p>
+    <div class="badge-line">No server · No house · Self-custodial USD₮</div>
+    <div class="tag-row">
+      <span class="chip g">Pear · Autobase · Hyperswarm</span>
+      <span class="chip m">WDK · Transaction Policy</span>
+      <span class="chip">227 tests</span>
+      <span class="chip">Σ paid = Σ staked</span>
+    </div>
+    <!-- action buttons — replace the video URL with the unlisted YouTube link before submitting -->
+    <div class="btns">
+      <a class="btn primary" href="https://github.com/edycutjong/kitty" target="_blank" rel="noopener">Source on GitHub ↗</a>
+      <a class="btn" href="https://youtu.be/Rx59vsOlg7Q" target="_blank" rel="noopener">▶ Watch the demo</a>
+      <a class="btn gold" href="https://dorahacks.io/hackathon/tether-developers-cup" target="_blank" rel="noopener">Tether Dev Cup ↗</a>
+    </div>
+  </section>
+
+  <!-- 2 PROBLEM -->
+  <section class="slide">
+    <div class="eyebrow">The problem</div>
+    <h2>Every group-chat pot has the same two holes.</h2>
+    <div class="cols">
+      <div>
+        <ul class="feat">
+          <li><span class="mk">01</span><span><b>Someone holds the money.</b><span class="d">A treasurer who can vanish, forget, or get hacked. You're trusting a custodian for a Saturday-afternoon bet.</span></span></li>
+          <li><span class="mk">02</span><span><b>Someone "misremembers" their pick.</b><span class="d">After kickoff, the story changes. There's no neutral record of who called what, when.</span></span></li>
+        </ul>
+      </div>
+      <div>
+        <p class="sub">The market's usual "fix" is to become the house: KYC, custody, fees, your data. That's not a fix — it's just a bigger treasurer.</p>
+        <p class="foot" style="margin-top:1.4rem">→ so we deleted the treasurer instead of replacing him.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 SOLUTION -->
+  <section class="slide">
+    <div class="eyebrow">The solution</div>
+    <h2>Delete the treasurer. <span class="safe">Keep the friend group.</span></h2>
+    <ul class="feat">
+      <li><span class="mk">◆</span><span><b>A pot is a link, not an institution.</b><span class="d">Open one and get a <code style="font-family:var(--mono)">pear://</code> invite — peers find each other on a Hyperswarm topic and a member admits your key. No accounts, no signup, no server.</span></span></li>
+      <li><span class="mk">◆</span><span><b>Stakes are self-custodial, policy-capped USD₮.</b><span class="d">Your buy-in pledges from a WDK wallet only you control; a local Transaction Policy caps it before any money exists.</span></span></li>
+      <li><span class="mk">◆</span><span><b>Picks seal shut before kickoff.</b><span class="d">A commit–reveal hash hides your prediction; every member cross-witnesses everyone's log at kickoff, so back-dating dies on screen.</span></span></li>
+      <li><span class="mk">◆</span><span><b>Consensus decides, and money moves itself.</b><span class="d">Stakers vote the final score; every peer computes the identical split; losers pay winners directly, wallet-to-wallet, gasless.</span></span></li>
+    </ul>
+    <div class="badge-line" style="margin-top:1.8rem">No server · No house · No custodian</div>
+  </section>
+
+  <!-- 4 MAGIC MOMENT -->
+  <section class="slide">
+    <div class="eyebrow">The magic moment</div>
+    <h2>Watch a <span class="bad">back-dated pick</span> die — on <span class="safe">every</span> peer's screen.</h2>
+    <p class="sub">This is the real <code style="font-family:var(--mono)">npm run verify:p2p</code> story: three peers, one tampering attempt, zero servers to ask for a ruling.</p>
+    <div class="ledger">
+      <div class="row ok"><span class="who">ana</span><span>stake</span><span>20 USD₮</span><span class="verdict ok">accepted</span></div>
+      <div class="row ok"><span class="who">ben</span><span>stake</span><span>20 USD₮</span><span class="verdict ok">accepted</span></div>
+      <div class="row ok"><span class="who">cai</span><span>stake</span><span>20 USD₮</span><span class="verdict ok">accepted</span></div>
+      <div class="row ok"><span class="who">ana</span><span>commit-pick</span><span>b7e2f1… (sealed)</span><span class="verdict ok">witnessed pre-kickoff</span></div>
+      <div class="sep">— kickoff · every peer cross-witnesses the others' logs —</div>
+      <div class="row rej"><span class="who">cai</span><span class="strike">commit-pick</span><span class="strike">2-1</span><span class="verdict rej">rejected: after-kickoff</span></div>
+      <div class="row vote"><span class="who">ana</span><span>result-vote</span><span>2-1</span><span class="verdict">quorum 2 of 3</span></div>
+      <div class="row vote"><span class="who">ben</span><span>result-vote</span><span>2-1</span><span class="verdict">quorum 2 of 3</span></div>
+    </div>
+    <div class="sumline">Σ CHECK &nbsp; paid 60 == staked 60 &nbsp;✓&nbsp; zero-sum, no house cut</div>
+    <p class="sub" style="margin-top:1.2rem">Nobody moderated that rejection. Every peer's own copy of the append-only log independently refused the same op — tampering is <em>evidence</em>, not an argument to win.</p>
+  </section>
+
+  <!-- 5 STACK -->
+  <section class="slide">
+    <div class="eyebrow">Why only this stack</div>
+    <h2>Pear × WDK — remove either and you rebuild the house.</h2>
+    <table class="stack">
+      <tr><td>Pear</td><td><b>P2P state, no server.</b> <b>Autobase</b> multi-writer merge is why there's no backend; <b>Hypercore</b> signed append-only logs make picks tamper-evident; <b>Hyperswarm</b> topics turn a pot ID into an instant room; <b>Hyperbee</b> is the indexed view; <b>Protomux</b> multiplexes membership pairing over the same encrypted stream.</td></tr>
+      <tr><td>WDK</td><td><b>Self-custodial money.</b> Self-custodial accounts (keys never leave the device), gasless USD₮ transfers, a real <b>Transaction Policy</b> buy-in cap (<code style="font-family:var(--mono)">PolicyViolationError</code> before any tx exists), <code style="font-family:var(--mono)">simulate.transfer</code> guardrail verdicts, BIP-39 seed management.</td></tr>
+      <tr><td>Core</td><td><b>The trust engine.</b> A pure, clock-free reducer (<code style="font-family:var(--mono)">src/core/reduce.js</code>) that every peer runs identically — the reason 227 tests can pin the protocol without a network or real money.</td></tr>
+    </table>
+    <p class="sub" style="margin-top:1.6rem">Take Pear out and you need a server, a database, a websocket layer. Take WDK out and you need a custodial escrow, a gas faucet, a limits engine. Two open-source stacks replace six systems <strong>and</strong> one treasurer.</p>
+  </section>
+
+  <!-- 6 PROOF -->
+  <section class="slide">
+    <div class="eyebrow">Proof, not promises</div>
+    <h2>It's real, and it's green.</h2>
+    <div class="grid4">
+      <div class="stat"><div class="n">227</div><div class="l">tests passing · 189 core + 15 P2P + 23 wallet, node:test</div></div>
+      <div class="stat"><div class="n m">3 peers</div><div class="l"><code style="font-family:var(--mono)">verify:p2p</code> · live tamper attempt · in-process DHT</div></div>
+      <div class="stat"><div class="n">byte-identical</div><div class="l">state across every peer under reorder / truncation / re-apply</div></div>
+      <div class="stat"><div class="n m">4.3ms</div><div class="l">peer-connect p50 (12.4ms p95) · reproducible via <code style="font-family:var(--mono)">bench</code></div></div>
+    </div>
+    <p class="sub" style="margin-top:1.8rem">Autobase convergence: <strong>7.4ms p50 / 13.3ms p95</strong>. Partition recovery (10 ops): <strong>10.5ms p50</strong>. Don't trust this slide — <code style="font-family:var(--mono)">git clone → npm install → npm test → npm run verify:p2p → npm run bench</code> and get your own numbers.</p>
+  </section>
+
+  <!-- 7 CLOSE -->
+  <section class="slide">
+    <div class="eyebrow">The Kitty</div>
+    <h1 style="font-size:clamp(2.1rem,6vw,4.6rem)">The house always wins.<br><span class="g">So we deleted the house.</span></h1>
+    <p class="lead" style="margin-top:1.6rem">Self-custodial stakes. Serverless state. Tamper-evident picks. Deterministic, wallet-to-wallet settlement — <span class="safe">Σ paid == Σ staked</span>, always.</p>
+    <div class="tag-row" style="margin-top:1.8rem">
+      <span class="chip g">Apache-2.0</span>
+      <span class="chip">v1.0.0</span>
+      <span class="chip">227 tests</span>
+      <span class="chip m">Tether Developers Cup 2026</span>
+    </div>
+    <div class="btns">
+      <a class="btn primary" href="https://github.com/edycutjong/kitty" target="_blank" rel="noopener">Source on GitHub ↗</a>
+      <a class="btn" href="https://youtu.be/Rx59vsOlg7Q" target="_blank" rel="noopener">▶ Watch the demo</a>
+      <a class="btn gold" href="https://dorahacks.io/hackathon/tether-developers-cup" target="_blank" rel="noopener">Tether Dev Cup ↗</a>
+    </div>
+    <p class="foot">github.com/edycutjong/kitty · <a href="../../landing/index.html">landing page</a> · built by Edy Cu</p>
+  </section>
+
+</div>
+
+<div id="hint">← / → · space &nbsp;·&nbsp; P notes · ESC grid · C contrast</div>
+<div id="nav">
+  <div class="dots" id="dots"></div>
+  <span class="count" id="count">01 / 07</span>
+  <div class="arrows"><button id="prev" aria-label="Previous slide">‹</button><button id="next" aria-label="Next slide">›</button></div>
+</div>
+
+<script>
+(function(){
+  var slides=[].slice.call(document.querySelectorAll('.slide'));
+  var i=0, n=slides.length;
+  var bar=document.getElementById('bar'), count=document.getElementById('count'),
+      dotsWrap=document.getElementById('dots');
+  slides.forEach(function(_,k){
+    var b=document.createElement('button'); b.setAttribute('aria-label','Go to slide '+(k+1));
+    b.addEventListener('click',function(){go(k)}); dotsWrap.appendChild(b);
+  });
+  var dots=[].slice.call(dotsWrap.children);
+  function pad(x){return (x<9?'0':'')+(x+1)}
+  function go(k){
+    i=Math.max(0,Math.min(n-1,k));
+    slides.forEach(function(s,j){s.classList.toggle('active',j===i)});
+    dots.forEach(function(d,j){d.classList.toggle('on',j===i)});
+    bar.style.width=((i)/(n-1)*100)+'%';
+    count.textContent=pad(i)+' / '+pad(n-1);
+  }
+  function next(){go(i+1)} function prev(){go(i-1)}
+  document.getElementById('next').addEventListener('click',next);
+  document.getElementById('prev').addEventListener('click',prev);
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();next()}
+    else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prev()}
+    else if(e.key==='Home'){go(0)} else if(e.key==='End'){go(n-1)}
+  });
+  // click right/left half to advance (ignore taps on nav/links)
+  document.getElementById('deck').addEventListener('click',function(e){
+    if(e.target.closest('#nav')||e.target.closest('a'))return;
+    (e.clientX > window.innerWidth/2 ? next : prev)();
+  });
+  // swipe
+  var x0=null;
+  addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
+  addEventListener('touchend',function(e){
+    if(x0===null)return; var dx=e.changedTouches[0].clientX-x0;
+    if(Math.abs(dx)>40){dx<0?next():prev()} x0=null;
+  },{passive:true});
+  go(0);
+})();
+</script>
+
+<script>
+/* presentation layer (added): presenter notes (P) · overview (ESC) · contrast (C) · print — decoupled from the deck engine above */
+(function(){
+  var NOTES=[
+    "Open on the universal pain &mdash; every friend-group pot has a treasurer who holds the cash and forgets who paid. One line: <b>we deleted the treasurer and the argument.</b> Let them read &lsquo;no server, no house&rsquo; themselves.",
+    "Two holes, not one: someone holds the money, and someone misremembers their pick after kickoff. The market&rsquo;s usual fix is to <b>become a bigger house</b> &mdash; KYC, custody, fees. We went the other way.",
+    "Walk the four beats fast: a pot is a link not an institution; stakes are self-custodial and policy-capped; picks seal before kickoff; consensus moves the money wallet-to-wallet. <b>No accounts, no signup, no server</b> &mdash; anywhere.",
+    "This is the peak. A back-dated pick is rejected on <b>every peer independently</b> &mdash; nobody moderates it. Land the idea: tampering becomes <b>evidence</b>, not an argument you can win. Point at the red row.",
+    "Be concrete &mdash; Pear and WDK are load-bearing, not decoration. Remove Pear and you need a server; remove WDK and you need a custodian. Two open-source stacks replace six systems and one treasurer.",
+    "Don&rsquo;t ask them to trust the slide &mdash; 227 green tests, a live 3-peer tamper run, a reproducible bench. Invite them: clone, install, test, verify:p2p, bench &mdash; get their own numbers.",
+    "Land the tagline &mdash; <b>the house always wins, so we deleted the house</b> &mdash; then the invariant they&rsquo;ll remember: &Sigma; paid == &Sigma; staked, always. Send them to the repo and demo."
+  ];
+  var slides=[].slice.call(document.querySelectorAll('.slide'));
+  var dots=[].slice.call(document.querySelectorAll('#dots button'));
+  var n=slides.length;
+  function esc(s){var d=document.createElement('div');d.textContent=s||'';return d.innerHTML;}
+  function pad(x){return (x<9?'0':'')+(x+1);}
+  var pv=document.createElement('div'); pv.id='pv'; document.body.appendChild(pv);
+  var ov=document.createElement('div'); ov.id='ov';
+  ov.innerHTML='<h3>All slides &mdash; click to jump &nbsp;·&nbsp; ESC to close</h3>';
+  var grid=document.createElement('div'); grid.className='ov-grid';
+  slides.forEach(function(s,k){
+    var t=((s.querySelector('h1,h2')||{}).textContent||'').trim()||('Slide '+(k+1));
+    var eye=((s.querySelector('.eyebrow,.kicker')||{}).textContent||'').trim();
+    var b=document.createElement('button'); b.className='ov-card'; b.type='button';
+    b.innerHTML='<span class="ov-n">'+pad(k)+' / '+pad(n-1)+'</span>'+(eye?'<span class="ov-eye">'+esc(eye)+'</span>':'')+'<span class="ov-t">'+esc(t)+'</span>';
+    b.addEventListener('click',function(){ if(dots[k]){dots[k].click();} ov.classList.remove('on'); });
+    grid.appendChild(b);
+  });
+  ov.appendChild(grid); document.body.appendChild(ov);
+  function idx(){for(var j=0;j<n;j++){if(slides[j].classList.contains('active')){return j;}}return 0;}
+  function syncNotes(){var i=idx(); pv.innerHTML='<span class="pv-n">SPEAKER · '+pad(i)+' / '+pad(n-1)+'</span>'+(NOTES[i]||'<span style="opacity:.55">(no note)</span>');}
+  var mo=new MutationObserver(syncNotes);
+  slides.forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+  syncNotes();
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){e.preventDefault();ov.classList.toggle('on');return;}
+    var k=(e.key||'').toLowerCase();
+    if(k==='p'){e.preventDefault();document.body.classList.toggle('presenting');}
+    else if(k==='c'){e.preventDefault();document.body.classList.toggle('debug-contrast');}
+  },true);
+  ov.addEventListener('click',function(e){if(e.target===ov){ov.classList.remove('on');}});
+})();
+</script>
+</body>
+</html>

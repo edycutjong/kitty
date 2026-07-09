@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="The Kitty">
+  <defs>
+    <linearGradient id="ka" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#8ce9c6"/><stop offset="1" stop-color="#1b8c69"/></linearGradient>
+    <radialGradient id="kb" cx="50%" cy="44%" r="56%"><stop offset="0" stop-color="#26a17b" stop-opacity=".4"/><stop offset=".6" stop-color="#26a17b" stop-opacity=".07"/><stop offset="1" stop-color="#26a17b" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect fill="#0b0e11" height="480" rx="112" width="480" x="16" y="16"/>
+  <rect fill="none" height="478" rx="111" stroke="#2a313b" stroke-width="2" width="478" x="17" y="17"/>
+  <rect fill="url(#kb)" height="480" rx="112" width="480" x="16" y="16">
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="3.2s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- P2P mesh: the pot's peers, data flowing between them -->
+  <g fill="none" stroke="#26a17b" stroke-width="5" stroke-dasharray="10 14">
+    <path d="m120 360 136 78 136-78" stroke-opacity=".4">
+      <animate attributeName="stroke-dashoffset" values="0;-48" dur="1.6s" repeatCount="indefinite"/>
+    </path>
+    <path d="m120 360h272" stroke-opacity=".28">
+      <animate attributeName="stroke-dashoffset" values="0;-48" dur="1.6s" repeatCount="indefinite"/>
+    </path>
+  </g>
+  <g fill="#26a17b">
+    <circle cx="120" cy="360" r="14"><animate attributeName="r" values="14;19;14" dur="2.1s" begin="0s" repeatCount="indefinite"/><animate attributeName="fill" values="#26a17b;#F5C542;#26a17b" dur="2.1s" begin="0s" repeatCount="indefinite"/></circle>
+    <circle cx="392" cy="360" r="14"><animate attributeName="r" values="14;19;14" dur="2.1s" begin="0.7s" repeatCount="indefinite"/><animate attributeName="fill" values="#26a17b;#F5C542;#26a17b" dur="2.1s" begin="0.7s" repeatCount="indefinite"/></circle>
+    <circle cx="256" cy="438" r="14"><animate attributeName="r" values="14;19;14" dur="2.1s" begin="1.4s" repeatCount="indefinite"/><animate attributeName="fill" values="#26a17b;#F5C542;#26a17b" dur="2.1s" begin="1.4s" repeatCount="indefinite"/></circle>
+  </g>
+
+  <!-- the kitty arch (pot handle / cat's back) -->
+  <path d="m214 306v-110a42 42 0 0 1 84 0v110" fill="none" stroke="url(#ka)" stroke-linecap="round" stroke-width="32">
+    <animate attributeName="opacity" values="0.85;1;0.85" dur="2.6s" repeatCount="indefinite"/>
+  </path>
+</svg>

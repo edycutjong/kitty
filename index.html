@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>The Kitty — no server, no house</title>
+<style>
+  /* THE KITTY — floodlit-night, premium fintech. Tokens from the brand suite. */
+  :root {
+    --bg: #0B0E11; --bg-2: #0E1319; --surface: #12161C; --surface-2: #171C24;
+    --primary: #26A17B; --primary-2: #1F8A69; --accent: #F5C542; --accent-2: #E3B02F;
+    --text: #F5F7FA; --text-muted: #9AA4B0; --text-dim: #6B7480;
+    --danger: #FF5C5C; --border: rgba(245,247,250,0.08); --border-strong: rgba(245,247,250,0.16);
+    --glow-primary: rgba(38,161,123,0.45); --glow-accent: rgba(245,197,66,0.5);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text);
+    font: 15px/1.5 -apple-system, "SF Pro Text", "Segoe UI", Inter, Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased; }
+  #titlebar { -webkit-app-region: drag; height: 34px; width: 100%; position: fixed; inset: 0 0 auto 0;
+    z-index: 50; background: transparent; }
+  pear-ctrl[data-platform="darwin"] { margin-top: 12px; margin-left: 10px; }
+  .hidden { display: none !important; }
+  main { min-height: 100vh; padding: 54px 28px 28px; position: relative; overflow-x: hidden; }
+  main::before { /* pitch line geometry + floodlight */
+    content: ''; position: fixed; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(600px 320px at 50% -60px, rgba(38,161,123,0.14), transparent 70%),
+      radial-gradient(circle at 50% 46%, rgba(245,197,66,0.05), transparent 55%);
+  }
+  h1, h2, h3 { font-family: "Avenir Next", "SF Pro Display", "Segoe UI", sans-serif; letter-spacing: -0.02em; }
+  .mono { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 12.5px; }
+
+  /* ── setup ── */
+  #setup { max-width: 860px; margin: 6vh auto 0; text-align: center; position: relative; }
+  .brand { font-size: 44px; font-weight: 900; letter-spacing: -0.04em; margin: 0 0 4px; }
+  .brand .kitty { color: var(--primary); }
+  .tagline { color: var(--text-muted); margin-bottom: 36px; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; text-align: left; }
+  .card { background: linear-gradient(160deg, rgba(38,161,123,0.06), var(--surface)); border: 1px solid var(--border);
+    border-radius: 16px; padding: 22px; backdrop-filter: blur(14px); }
+  .card h3 { margin: 0 0 14px; font-size: 17px; }
+  label { display: block; color: var(--text-muted); font-size: 12px; margin: 12px 0 4px; text-transform: uppercase; letter-spacing: 0.06em; }
+  input { width: 100%; background: var(--bg-2); border: 1px solid var(--border-strong); border-radius: 10px;
+    color: var(--text); padding: 10px 12px; font-size: 14px; outline: none; }
+  input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(38,161,123,0.25); }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  button { border: 0; border-radius: 999px; padding: 12px 22px; font-weight: 700; font-size: 14px;
+    cursor: pointer; transition: transform 0.12s ease, box-shadow 0.12s ease; }
+  button:active { transform: scale(0.97); }
+  .btn-primary { background: var(--primary); color: #04140E; box-shadow: 0 6px 24px var(--glow-primary); margin-top: 18px; width: 100%; }
+  .btn-gold { background: var(--accent); color: #241C02; box-shadow: 0 6px 24px var(--glow-accent); }
+  .btn-ghost { background: var(--surface-2); color: var(--text); border: 1px solid var(--border-strong); }
+  button:disabled { opacity: 0.4; cursor: default; box-shadow: none; }
+
+  /* ── pot view ── */
+  #pot { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 1fr 340px; gap: 22px; }
+  header.match { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 14px 20px; }
+  .teams { font-size: 22px; font-weight: 800; }
+  .vs { color: var(--text-dim); font-weight: 400; padding: 0 8px; }
+  .badge { display: inline-flex; align-items: center; gap: 7px; border-radius: 999px; padding: 6px 12px;
+    font-size: 12px; font-weight: 600; background: rgba(38,161,123,0.12); color: var(--primary);
+    border: 1px solid rgba(38,161,123,0.35); }
+  .badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--primary); box-shadow: 0 0 8px var(--primary); }
+  #countdown { font-weight: 800; font-size: 18px; color: var(--accent); }
+  #countdown.locked { color: var(--primary); }
+
+  .stage { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 26px; position: relative; }
+  .pot-circle { width: 250px; height: 250px; margin: 8px auto 4px; border-radius: 50%; position: relative;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: radial-gradient(circle at 50% 42%, rgba(245,197,66,0.18), rgba(245,197,66,0.05) 55%, transparent 75%);
+    border: 1px solid rgba(245,197,66,0.35); box-shadow: 0 0 60px rgba(245,197,66,0.14), inset 0 0 40px rgba(245,197,66,0.06); }
+  .pot-circle::before { content: ''; position: absolute; inset: -14px; border-radius: 50%;
+    border: 1px dashed rgba(245,247,250,0.12); }
+  #pool { font-size: 44px; font-weight: 900; color: var(--accent); letter-spacing: -0.03em; }
+  .pool-label { color: var(--text-muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.14em; }
+  #pot-status { margin-top: 6px; font-size: 12px; color: var(--text-muted); }
+
+  #members { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 18px 0 6px; }
+  .member { background: var(--bg-2); border: 1px solid var(--border-strong); border-radius: 12px;
+    padding: 8px 12px; min-width: 148px; }
+  .member .name { font-weight: 700; }
+  .member .key { color: var(--text-dim); }
+  .chips { margin-top: 4px; display: flex; flex-wrap: wrap; gap: 4px; }
+  .chip { font-size: 10.5px; padding: 2px 7px; border-radius: 999px; border: 1px solid var(--border-strong); color: var(--text-muted); }
+  .chip.ok { color: var(--primary); border-color: rgba(38,161,123,0.5); background: rgba(38,161,123,0.08); }
+  .chip.warn { color: var(--accent); border-color: rgba(245,197,66,0.5); }
+  .chip.gold { color: var(--accent); border-color: rgba(245,197,66,0.5); background: rgba(245,197,66,0.07); }
+
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 18px; }
+  .actions .group { display: flex; gap: 8px; align-items: center; background: var(--bg-2);
+    border: 1px solid var(--border); border-radius: 999px; padding: 6px; }
+  .score-input { width: 72px; text-align: center; border-radius: 999px; padding: 8px 10px; }
+
+  #settlement { grid-column: 1; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 22px; }
+  .proof { display: flex; gap: 12px; flex-wrap: wrap; margin: 12px 0; }
+  .proof .strip { background: rgba(38,161,123,0.1); border: 1px solid rgba(38,161,123,0.4); color: var(--primary);
+    border-radius: 10px; padding: 8px 14px; font-weight: 700; font-size: 13px; }
+  .payout-row { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border);
+    padding: 9px 2px; }
+  .payout-row a { color: var(--primary); }
+
+  aside { display: flex; flex-direction: column; gap: 18px; }
+  .rail { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 16px; }
+  .rail h3 { margin: 0 0 10px; font-size: 13px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; }
+  #peers { font-weight: 800; color: var(--primary); }
+  #ledger { max-height: 46vh; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; }
+  .op { border-left: 2px solid var(--primary); padding: 4px 8px; background: var(--bg-2); border-radius: 0 8px 8px 0; }
+  .op.rejected { border-left-color: var(--danger); }
+  .op.rejected .sum { text-decoration: line-through; color: var(--danger); }
+  .op .meta { color: var(--text-dim); }
+  #invite-box { word-break: break-all; background: var(--bg-2); padding: 10px; border-radius: 10px; cursor: pointer;
+    border: 1px dashed rgba(38,161,123,0.5); }
+  #toast { position: fixed; bottom: 26px; left: 50%; transform: translateX(-50%); z-index: 90;
+    background: var(--surface-2); border: 1px solid var(--border-strong); border-radius: 12px; padding: 12px 18px;
+    max-width: 640px; box-shadow: 0 12px 40px rgba(0,0,0,0.5); }
+  #toast.error { border-color: var(--danger); color: var(--danger); }
+  #toast.ok { border-color: var(--primary); color: var(--primary); }
+  .dryrun-note { font-size: 11.5px; color: var(--text-dim); text-align: center; margin-top: 10px; }
+</style>
+<script type="module" src="./app.js"></script>
+</head>
+<body>
+  <div id="titlebar"><pear-ctrl></pear-ctrl></div>
+  <main>
+    <!-- SETUP -->
+    <section id="setup">
+      <h1 class="brand">THE <span class="kitty">KITTY</span> 🐱⚽</h1>
+      <p class="tagline">Your mates' sweepstake — but nobody holds the cash and nobody can cheat.<br>
+        <span class="badge" style="margin-top:10px"><span class="dot"></span> No server · No house · Self-custodial USD₮</span></p>
+      <div class="cards">
+        <div class="card">
+          <h3>Open a pot</h3>
+          <label>Your name</label><input id="c-name" placeholder="ana" maxlength="32">
+          <div class="row2">
+            <div><label>Home team</label><input id="c-home" placeholder="Brazil" maxlength="32"></div>
+            <div><label>Away team</label><input id="c-away" placeholder="Argentina" maxlength="32"></div>
+          </div>
+          <div class="row2">
+            <div><label>Buy-in (USD₮)</label><input id="c-buyin" value="20"></div>
+            <div><label>Kickoff in (minutes)</label><input id="c-mins" value="10"></div>
+          </div>
+          <button id="btn-create" class="btn-primary">Open the pot</button>
+        </div>
+        <div class="card">
+          <h3>Join with an invite</h3>
+          <label>Your name</label><input id="j-name" placeholder="ben" maxlength="32">
+          <label>Invite link</label><input id="j-invite" placeholder="pear://kitty/…" class="mono">
+          <button id="btn-join" class="btn-primary">Join the pot</button>
+          <p class="dryrun-note">Peers find each other over Hyperswarm — a member admits your key automatically.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- POT -->
+    <section id="pot" class="hidden">
+      <header class="match">
+        <div class="teams"><span id="m-home">—</span><span class="vs">v</span><span id="m-away">—</span></div>
+        <div id="countdown">--:--</div>
+        <span class="badge"><span class="dot"></span> No server · No house · Self-custodial</span>
+      </header>
+
+      <div>
+        <div class="stage">
+          <div class="pot-circle">
+            <div class="pool-label">The Kitty</div>
+            <div id="pool">0</div>
+            <div class="pool-label">USD₮</div>
+          </div>
+          <div id="pot-status" style="text-align:center"></div>
+          <div id="members"></div>
+          <div class="actions">
+            <button id="btn-stake" class="btn-gold">Stake <span id="stake-amt"></span> USD₮ (gasless)</button>
+            <div class="group">
+              <input id="pick-h" class="score-input mono" placeholder="2"><span>–</span><input id="pick-a" class="score-input mono" placeholder="1">
+              <button id="btn-pick" class="btn-primary" style="margin:0;width:auto">Seal pick 🔒</button>
+            </div>
+            <button id="btn-reveal" class="btn-ghost">Reveal</button>
+            <div class="group">
+              <input id="res-h" class="score-input mono" placeholder="2"><span>–</span><input id="res-a" class="score-input mono" placeholder="1">
+              <button id="btn-result" class="btn-ghost" style="margin:0;width:auto">Vote result</button>
+            </div>
+            <button id="btn-settle" class="btn-gold">Settle up</button>
+          </div>
+          <p class="dryrun-note" id="mode-note">dry-run mode — tx ids are simulations, clearly labelled</p>
+        </div>
+
+        <div id="settlement" class="hidden" style="margin-top:20px">
+          <h3 style="margin-top:0">Settlement & payout</h3>
+          <div class="proof">
+            <div class="strip" id="proof-sum">Σ paid = Σ staked</div>
+            <div class="strip">Transaction Policy: buy-in cap respected</div>
+            <div class="strip" id="proof-result">Result —</div>
+          </div>
+          <div id="payouts"></div>
+        </div>
+      </div>
+
+      <aside>
+        <div class="rail">
+          <h3>P2P mesh</h3>
+          <div><span id="peers">0</span> peers connected · Autobase synced <span style="color:var(--primary)">✓</span></div>
+          <div class="mono" style="color:var(--text-dim); margin-top:6px" id="my-key">—</div>
+        </div>
+        <div class="rail">
+          <h3>Invite your mates</h3>
+          <div id="invite-box" class="mono" title="click to copy">—</div>
+        </div>
+        <div class="rail">
+          <h3>Tamper-evident ledger</h3>
+          <div id="ledger" class="mono"></div>
+        </div>
+      </aside>
+    </section>
+  </main>
+  <div id="toast" class="hidden"></div>
+</body>
+</html>

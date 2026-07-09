@@ -1,0 +1,467 @@
+{
+  "state": {
+    "pot": {
+      "potId": "e0d307206e03b291ff413d13564329bcd4afb7e0827265c38bf60c16f4213a12",
+      "matchId": "wc2026-final",
+      "teams": {
+        "home": "Brazil",
+        "away": "Argentina"
+      },
+      "buyIn": "20000000",
+      "kickoffTs": 1783516377393,
+      "chain": "dry-run",
+      "token": "USDT",
+      "quorum": null,
+      "witnessRule": "strict",
+      "creator": "e0d307206e03b291ff413d13564329bcd4afb7e0827265c38bf60c16f4213a12",
+      "createdTs": 1783516375893
+    },
+    "writers": {
+      "e0d307206e03b291ff413d13564329bcd4afb7e0827265c38bf60c16f4213a12": {
+        "name": "ana",
+        "addedBy": null,
+        "ts": 1783516375893
+      },
+      "c3a97ea3e9ae5719341d4438e2d388f37dd4f8a3e612369ac3b317099404dd38": {
+        "name": "ben",
+        "addedBy": "e0d307206e03b291ff413d13564329bcd4afb7e0827265c38bf60c16f4213a12",
+        "ts": 1783516375936
+      },
+      "4ad71738b5570cc0f3951379ac9f2f2179f62075fb55a8a8168599e88d9b3029": {
+        "name": "cai",
+        "addedBy": "e0d307206e03b291ff413d13564329bcd4afb7e0827265c38bf60c16f4213a12",
+        "ts": 1783516375947
+      }
+    },
+    "stakes": {
+      "e0d307206e03b291ff413d13564329bcd4afb7e0827265c38bf60c16f4213a12": {
+        "amount": "20000000",
+        "payoutAddress": "DRY80aebca4e5a6c09662e695cfa2353",
+        "real": false,
+        "ts": 1783516375969
+      },
+      "c3a97ea3e9ae5719341d4438e2d388f37dd4f8a3e612369ac3b317099404dd38": {
+        "amount": "20000000",
+        "payoutAddress": "DRYf8705778aa5f28aa62c4f42ad8e04",
+        "real": false,
+        "ts": 1783516375990
+      },
+      "4ad71738b5570cc0f3951379ac9f2f2179f62075fb55a8a8168599e88d9b3029": {
+        "amount": "20000000",
+        "payoutAddress": "DRY3a5434a383b506607020ca2fb4e1b",
+        "real": false,
+        "ts": 1783516375998
+      }
+    },
+    "commits": {
+      "e0d307206e03b291ff413d13564329bcd4afb7e0827265c38bf60c16f4213a12": {
+        "commitment": "6629d15750b4bc727481506711a2c3100cd14f8f181921723226d363f407799d",
+        "ts": 1783516376001,
+        "seq": 5
+      },
+      "c3a97ea3e9ae5719341d4438e2d388f37dd4f8a3e612369ac3b317099404dd38": {
+        "commitment": "c6ae306465ca0fecdd2ffd236de8390a8644270235e1a243c1452bba754932ed",
+        "ts": 1783516376038,
+        "seq": 3
+      },
+      "4ad71738b5570cc0f3951379ac9f2f2179f62075fb55a8a8168599e88d9b3029": {
+        "commitment": "abababababababababababababababababababababababababababababababab",
+        "ts": 1783516377392,
+        "seq": 4
+      }
+    },
+    "snapshots": {
+      "c3a97ea3e9ae5719341d4438e2d388f37dd4f8a3e612369ac3b317099404dd38": {
+        "heads": {
+          "e0d307206e03b291ff413d13564329bcd4afb7e0827265c38bf60c16f4213a12": 5,
+          "c3a97ea3e9ae5719341d4438e2d388f37dd4f8a3e612369ac3b317099404dd38": 3,
+          "4ad71738b5570cc0f3951379ac9f2f2179f62075fb55a8a8168599e88d9b3029": 2
+        },
+        "ts": 1783516377597
+      },
+      "e0d307206e03b291ff413d13564329bcd4afb7e0827265c38bf60c16f4213a12": {
+        "heads": {
+          "e0d307206e03b291ff413d13564329bcd4afb7e0827265c38bf60c16f4213a12": 5,
+          "c3a97ea3e9ae5719341d4438e2d388f37dd4f8a3e612369ac3b317099404dd38": 3,
+          "4ad71738b5570cc0f3951379ac9f2f2179f62075fb55a8a8168599e88d9b3029": 2
+        },
+        "ts": 1783516377594
+      },
+      "4ad71738b5570cc0f3951379ac9f2f2179f62075fb55a8a8168599e88d9b3029": {
+        "heads": {
+          "e0d307206e03b291ff413d13564329bcd4afb7e0827265c38bf60c16f4213a12": 6,
+          "c3a97ea3e9ae5719341d4438e2d388f37dd4f8a3e612369ac3b317099404dd38": 4,
+          "4ad71738b5570cc0f3951379ac9f2f2179f62075fb55a8a8168599e88d9b3029": 2
+        },
+        "ts": 1783516377609
+      }
+    },
+    "reveals": {
+      "e0d307206e03b291ff413d13564329bcd4afb7e0827265c38bf60c16f4213a12": {
+        "prediction": {
+          "home": 2,
+          "away": 1
+        },
+        "salt": "3530ed03a98cd706cc514c485dd7f9c3",
+        "ts": 1783516377638
+      },
+      "c3a97ea3e9ae5719341d4438e2d388f37dd4f8a3e612369ac3b317099404dd38": {
+        "prediction": {
+          "home": 0,
+          "away": 0
+        },
+        "salt": "9ef3d43080edfc4479c714f3fbac6c1c",
+        "ts": 1783516377662
+      }
+    },
+    "votes": {
+      "e0d307206e03b291ff413d13564329bcd4afb7e0827265c38bf60c16f4213a12": {
+        "score": {
+          "home": 2,
+          "away": 1
+        },
+        "ts": 1783516377667
+      },
+      "c3a97ea3e9ae5719341d4438e2d388f37dd4f8a3e612369ac3b317099404dd38": {
+        "score": {
+          "home": 2,
+          "away": 1
+        },
+        "ts": 1783516377674
+      }
+    },
+    "result": {
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "confirmations": [
+        "c3a97ea3e9ae5719341d4438e2d388f37dd4f8a3e612369ac3b317099404dd38",
+        "e0d307206e03b291ff413d13564329bcd4afb7e0827265c38bf60c16f4213a12"
+      ],
+      "finalizedTs": 1783516377674,
+      "quorum": 2
+    },
+    "payouts": {
+      "4ad71738b5570cc0f3951379ac9f2f2179f62075fb55a8a8168599e88d9b3029": {
+        "transfers": [
+          {
+            "to": "e0d307206e03b291ff413d13564329bcd4afb7e0827265c38bf60c16f4213a12",
+            "amount": "20000000",
+            "txid": "DRYRUN-150ace84804c086e9a7e9d5c7feae01ff55cac5c"
+          }
+        ],
+        "ts": 1783516377711
+      },
+      "c3a97ea3e9ae5719341d4438e2d388f37dd4f8a3e612369ac3b317099404dd38": {
+        "transfers": [
+          {
+            "to": "e0d307206e03b291ff413d13564329bcd4afb7e0827265c38bf60c16f4213a12",
+            "amount": "20000000",
+            "txid": "DRYRUN-6e2ec7b56a583355eba8c5ecf12f2ecbe50b94b8"
+          }
+        ],
+        "ts": 1783516377709
+      }
+    },
+    "status": "settled",
+    "log": [
+      {
+        "i": 0,
+        "writer": "e0d307206e03b291ff413d13564329bcd4afb7e0827265c38bf60c16f4213a12",
+        "seq": 1,
+        "type": "open-pot",
+        "ts": 1783516375893,
+        "summary": "Brazil v Argentina · buy-in 20000000",
+        "accepted": true,
+        "reason": null
+      },
+      {
+        "i": 1,
+        "writer": "e0d307206e03b291ff413d13564329bcd4afb7e0827265c38bf60c16f4213a12",
+        "seq": 2,
+        "type": "add-writer",
+        "ts": 1783516375936,
+        "summary": "ben (c3a97ea3…)",
+        "accepted": true,
+        "reason": null
+      },
+      {
+        "i": 2,
+        "writer": "e0d307206e03b291ff413d13564329bcd4afb7e0827265c38bf60c16f4213a12",
+        "seq": 3,
+        "type": "add-writer",
+        "ts": 1783516375947,
+        "summary": "cai (4ad71738…)",
+        "accepted": true,
+        "reason": null
+      },
+      {
+        "i": 3,
+        "writer": "e0d307206e03b291ff413d13564329bcd4afb7e0827265c38bf60c16f4213a12",
+        "seq": 4,
+        "type": "stake",
+        "ts": 1783516375969,
+        "summary": "pledged 20000000",
+        "accepted": true,
+        "reason": null
+      },
+      {
+        "i": 4,
+        "writer": "c3a97ea3e9ae5719341d4438e2d388f37dd4f8a3e612369ac3b317099404dd38",
+        "seq": 2,
+        "type": "stake",
+        "ts": 1783516375990,
+        "summary": "pledged 20000000",
+        "accepted": true,
+        "reason": null
+      },
+      {
+        "i": 5,
+        "writer": "4ad71738b5570cc0f3951379ac9f2f2179f62075fb55a8a8168599e88d9b3029",
+        "seq": 2,
+        "type": "stake",
+        "ts": 1783516375998,
+        "summary": "pledged 20000000",
+        "accepted": true,
+        "reason": null
+      },
+      {
+        "i": 6,
+        "writer": "e0d307206e03b291ff413d13564329bcd4afb7e0827265c38bf60c16f4213a12",
+        "seq": 5,
+        "type": "commit-pick",
+        "ts": 1783516376001,
+        "summary": "sealed pick 6629d15750b4…",
+        "accepted": true,
+        "reason": null
+      },
+      {
+        "i": 7,
+        "writer": "c3a97ea3e9ae5719341d4438e2d388f37dd4f8a3e612369ac3b317099404dd38",
+        "seq": 3,
+        "type": "commit-pick",
+        "ts": 1783516376038,
+        "summary": "sealed pick c6ae306465ca…",
+        "accepted": true,
+        "reason": null
+      },
+      {
+        "i": 8,
+        "writer": "c3a97ea3e9ae5719341d4438e2d388f37dd4f8a3e612369ac3b317099404dd38",
+        "seq": 4,
+        "type": "kickoff-snapshot",
+        "ts": 1783516377597,
+        "summary": "witnessed 3 logs",
+        "accepted": true,
+        "reason": null
+      },
+      {
+        "i": 9,
+        "writer": "e0d307206e03b291ff413d13564329bcd4afb7e0827265c38bf60c16f4213a12",
+        "seq": 6,
+        "type": "kickoff-snapshot",
+        "ts": 1783516377594,
+        "summary": "witnessed 3 logs",
+        "accepted": true,
+        "reason": null
+      },
+      {
+        "i": 10,
+        "writer": "4ad71738b5570cc0f3951379ac9f2f2179f62075fb55a8a8168599e88d9b3029",
+        "seq": 3,
+        "type": "kickoff-snapshot",
+        "ts": 1783516377609,
+        "summary": "witnessed 3 logs",
+        "accepted": true,
+        "reason": null
+      },
+      {
+        "i": 11,
+        "writer": "4ad71738b5570cc0f3951379ac9f2f2179f62075fb55a8a8168599e88d9b3029",
+        "seq": 4,
+        "type": "commit-pick",
+        "ts": 1783516377392,
+        "summary": "sealed pick abababababab…",
+        "accepted": true,
+        "reason": null
+      },
+      {
+        "i": 12,
+        "writer": "e0d307206e03b291ff413d13564329bcd4afb7e0827265c38bf60c16f4213a12",
+        "seq": 7,
+        "type": "reveal-pick",
+        "ts": 1783516377638,
+        "summary": "revealed 2–1",
+        "accepted": true,
+        "reason": null
+      },
+      {
+        "i": 13,
+        "writer": "c3a97ea3e9ae5719341d4438e2d388f37dd4f8a3e612369ac3b317099404dd38",
+        "seq": 5,
+        "type": "reveal-pick",
+        "ts": 1783516377662,
+        "summary": "revealed 0–0",
+        "accepted": true,
+        "reason": null
+      },
+      {
+        "i": 14,
+        "writer": "e0d307206e03b291ff413d13564329bcd4afb7e0827265c38bf60c16f4213a12",
+        "seq": 8,
+        "type": "result-vote",
+        "ts": 1783516377667,
+        "summary": "voted 2–1",
+        "accepted": true,
+        "reason": null
+      },
+      {
+        "i": 15,
+        "writer": "c3a97ea3e9ae5719341d4438e2d388f37dd4f8a3e612369ac3b317099404dd38",
+        "seq": 6,
+        "type": "result-vote",
+        "ts": 1783516377674,
+        "summary": "voted 2–1",
+        "accepted": true,
+        "reason": null
+      },
+      {
+        "i": 16,
+        "writer": "4ad71738b5570cc0f3951379ac9f2f2179f62075fb55a8a8168599e88d9b3029",
+        "seq": 5,
+        "type": "payout",
+        "ts": 1783516377711,
+        "summary": "settled 1 transfer(s)",
+        "accepted": true,
+        "reason": null
+      },
+      {
+        "i": 17,
+        "writer": "c3a97ea3e9ae5719341d4438e2d388f37dd4f8a3e612369ac3b317099404dd38",
+        "seq": 7,
+        "type": "payout",
+        "ts": 1783516377709,
+        "summary": "settled 1 transfer(s)",
+        "accepted": true,
+        "reason": null
+      }
+    ]
+  },
+  "summary": {
+    "status": "settled",
+    "pot": {
+      "potId": "e0d307206e03b291ff413d13564329bcd4afb7e0827265c38bf60c16f4213a12",
+      "matchId": "wc2026-final",
+      "teams": {
+        "home": "Brazil",
+        "away": "Argentina"
+      },
+      "buyIn": "20000000",
+      "kickoffTs": 1783516377393,
+      "chain": "dry-run",
+      "token": "USDT",
+      "quorum": null,
+      "witnessRule": "strict",
+      "creator": "e0d307206e03b291ff413d13564329bcd4afb7e0827265c38bf60c16f4213a12",
+      "createdTs": 1783516375893
+    },
+    "members": [
+      {
+        "key": "e0d307206e03b291ff413d13564329bcd4afb7e0827265c38bf60c16f4213a12",
+        "name": "ana",
+        "staked": true,
+        "committed": true,
+        "witnessed": true,
+        "revealed": true,
+        "valid": true,
+        "prediction": {
+          "home": 2,
+          "away": 1
+        },
+        "voted": true,
+        "paid": false
+      },
+      {
+        "key": "c3a97ea3e9ae5719341d4438e2d388f37dd4f8a3e612369ac3b317099404dd38",
+        "name": "ben",
+        "staked": true,
+        "committed": true,
+        "witnessed": true,
+        "revealed": true,
+        "valid": true,
+        "prediction": {
+          "home": 0,
+          "away": 0
+        },
+        "voted": true,
+        "paid": true
+      },
+      {
+        "key": "4ad71738b5570cc0f3951379ac9f2f2179f62075fb55a8a8168599e88d9b3029",
+        "name": "cai",
+        "staked": true,
+        "committed": true,
+        "witnessed": false,
+        "revealed": false,
+        "valid": false,
+        "prediction": null,
+        "voted": false,
+        "paid": true
+      }
+    ],
+    "pool": "60000000",
+    "poolPretty": "60 USD₮",
+    "result": {
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "confirmations": [
+        "c3a97ea3e9ae5719341d4438e2d388f37dd4f8a3e612369ac3b317099404dd38",
+        "e0d307206e03b291ff413d13564329bcd4afb7e0827265c38bf60c16f4213a12"
+      ],
+      "finalizedTs": 1783516377674,
+      "quorum": 2
+    },
+    "quorum": 2,
+    "splitMode": "win",
+    "splits": [
+      {
+        "writer": "e0d307206e03b291ff413d13564329bcd4afb7e0827265c38bf60c16f4213a12",
+        "amount": "60000000",
+        "pretty": "60"
+      }
+    ],
+    "accounting": {
+      "holds": true,
+      "paid": "60000000",
+      "pool": "60000000"
+    },
+    "settlement": {
+      "mode": "win",
+      "owes": [
+        {
+          "from": "4ad71738b5570cc0f3951379ac9f2f2179f62075fb55a8a8168599e88d9b3029",
+          "to": "e0d307206e03b291ff413d13564329bcd4afb7e0827265c38bf60c16f4213a12",
+          "amount": "20000000",
+          "toAddress": "DRY80aebca4e5a6c09662e695cfa2353"
+        },
+        {
+          "from": "c3a97ea3e9ae5719341d4438e2d388f37dd4f8a3e612369ac3b317099404dd38",
+          "to": "e0d307206e03b291ff413d13564329bcd4afb7e0827265c38bf60c16f4213a12",
+          "amount": "20000000",
+          "toAddress": "DRY80aebca4e5a6c09662e695cfa2353"
+        }
+      ],
+      "receives": {
+        "e0d307206e03b291ff413d13564329bcd4afb7e0827265c38bf60c16f4213a12": "40000000"
+      },
+      "winners": [
+        "e0d307206e03b291ff413d13564329bcd4afb7e0827265c38bf60c16f4213a12"
+      ]
+    },
+    "rejected": 0,
+    "logLength": 18
+  }
+}
