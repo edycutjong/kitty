@@ -2,6 +2,7 @@
   <defs>
     <linearGradient id="ka" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#8ce9c6"/><stop offset="1" stop-color="#1b8c69"/></linearGradient>
     <radialGradient id="kb" cx="50%" cy="44%" r="56%"><stop offset="0" stop-color="#26a17b" stop-opacity=".4"/><stop offset=".6" stop-color="#26a17b" stop-opacity=".07"/><stop offset="1" stop-color="#26a17b" stop-opacity="0"/></radialGradient>
+    <radialGradient id="kc-gold" cx="40%" cy="30%" r="80%"><stop offset="0%" stop-color="#FCE491"/><stop offset="46%" stop-color="#F5C542"/><stop offset="100%" stop-color="#AF7A14"/></radialGradient>
   </defs>
   <rect fill="#0b0e11" height="480" rx="112" width="480" x="16" y="16"/>
   <rect fill="none" height="478" rx="111" stroke="#2a313b" stroke-width="2" width="478" x="17" y="17"/>
@@ -28,4 +29,17 @@
   <path d="m214 306v-110a42 42 0 0 1 84 0v110" fill="none" stroke="url(#ka)" stroke-linecap="round" stroke-width="32">
     <animate attributeName="opacity" values="0.85;1;0.85" dur="2.6s" repeatCount="indefinite"/>
   </path>
+
+  <!-- the sealed kitty coin (USD₮ pot lock) -->
+  <g>
+    <circle cx="256" cy="284" r="92" fill="url(#kc-gold)">
+      <animate attributeName="opacity" values="0.9;1;0.9" dur="2.6s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="256" cy="284" r="92" fill="none" stroke="#7A5410" stroke-width="7" opacity="0.5"/>
+    <ellipse cx="228" cy="262" rx="32" ry="19" fill="#FFFFFF" opacity="0.22"/>
+    <g fill="#1A1403">
+      <circle cx="256" cy="272" r="16"/>
+      <path d="M247 282 L241 328 H271 L265 282 Z"/>
+    </g>
+  </g>
 </svg>
