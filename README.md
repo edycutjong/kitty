@@ -8,6 +8,9 @@
 
   [![CI/CD Pipeline](https://github.com/edycutjong/kitty/actions/workflows/ci.yml/badge.svg)](https://github.com/edycutjong/kitty/actions/workflows/ci.yml)
 
+  [![Watch the 3-min demo](https://img.shields.io/badge/Watch_the_3--min_demo-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/Rx59vsOlg7Q)
+  [![Pitch deck](https://img.shields.io/badge/Pitch_deck-live-3AC569?style=for-the-badge)](https://edycutjong.github.io/kitty/docs/pitch/)
+
   [![Built for Tether Developers Cup](https://img.shields.io/badge/DoraHacks-Tether_Developers_Cup-8b5cf6?style=for-the-badge)](https://dorahacks.io/hackathon/tether-developers-cup)
   [![Track](https://img.shields.io/badge/Track-Pear_(WDK_supporting)-26A17B?style=for-the-badge)](#-why-only-pear--wdk)
 
