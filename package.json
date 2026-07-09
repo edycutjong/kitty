@@ -31,12 +31,12 @@
     }
   },
   "scripts": {
-    "test": "node --test \"test/**/*.test.js\"",
-    "test:core": "node --test \"test/core/*.test.js\"",
-    "test:p2p": "node --test \"test/p2p/*.test.js\"",
-    "test:wallet": "node --test \"test/wallet/*.test.js\"",
+    "test": "node --test $(find test -name '*.test.js')",
+    "test:core": "node --test $(find test/core -name '*.test.js')",
+    "test:p2p": "node --test $(find test/p2p -name '*.test.js')",
+    "test:wallet": "node --test $(find test/wallet -name '*.test.js')",
     "count:tests": "node scripts/count_tests.js",
-    "coverage": "c8 --all --include=\"src/**\" --check-coverage --lines 100 --functions 100 --branches 100 --reporter=text node --test \"test/**/*.test.js\"",
+    "coverage": "c8 --all --include=\"src/**\" --check-coverage --lines 100 --functions 100 --branches 100 --reporter=text node --test $(find test -name '*.test.js')",
     "lint": "standard",
     "lint:fix": "standard --fix",
     "bench": "node scripts/bench.js",
