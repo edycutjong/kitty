@@ -61,7 +61,7 @@
   },
   "devDependencies": {
     "c8": "^11.0.0",
-    "hyperdht": "^6.32.0",
+    "hyperdht": "^6.33.0",
     "standard": "^17.1.2"
   },
   "standard": {
