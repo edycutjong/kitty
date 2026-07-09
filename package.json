@@ -1,6 +1,6 @@
 {
   "name": "kitty",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Serverless, self-custodial USD₮ match-prediction pot — no server, no house, no custodian. Pear (Hypercore/Autobase/Hyperswarm) × Tether WDK.",
   "license": "Apache-2.0",
   "private": true,
