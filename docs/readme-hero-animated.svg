@@ -11,7 +11,13 @@
     </linearGradient>
     <radialGradient id="kh-gold" cx="40%" cy="30%" r="80%"><stop offset="0%" stop-color="#FCE491"/><stop offset="46%" stop-color="#F5C542"/><stop offset="100%" stop-color="#AF7A14"/></radialGradient>
     <linearGradient id="kh-shackle" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#8CE9C6"/><stop offset="100%" stop-color="#1B8C69"/></linearGradient>
-    <filter id="kh-cshadow" x="-40%" y="-40%" width="180%" height="180%"><feDropShadow dx="0" dy="6" stdDeviation="9" flood-color="#000000" flood-opacity="0.4"/></filter>
+    <filter id="kh-cshadow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="9" result="kh-blur"/>
+      <feOffset in="kh-blur" dx="0" dy="6" result="kh-off"/>
+      <feFlood flood-color="#000000" flood-opacity="0.4" result="kh-color"/>
+      <feComposite in="kh-color" in2="kh-off" operator="in" result="kh-shadow-out"/>
+      <feMerge><feMergeNode in="kh-shadow-out"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
     <radialGradient id="kh-bg" cx="80%" cy="12%" r="90%">
       <stop offset="0%" stop-color="#12321F"/><stop offset="45%" stop-color="#0B0E11"/><stop offset="100%" stop-color="#0B0E11"/>
     </radialGradient>
