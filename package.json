@@ -51,7 +51,7 @@
     "autobase": "^7.28.1",
     "b4a": "^1.6.7",
     "compact-encoding": "^3.3.0",
-    "corestore": "^7.11.0",
+    "corestore": "^7.11.1",
     "hyperbee": "^2.27.3",
     "hypercore-crypto": "^3.6.1",
     "hyperswarm": "^4.17.0",
