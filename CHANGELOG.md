@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/edycutjong/kitty/compare/v1.1.0...v1.1.1) (2026-08-22)
+
+
+### Bug Fixes
+
+* **deps:** resolve 3 dependency vulnerabilities via lockfile ([2956762](https://github.com/edycutjong/kitty/commit/295676218f5dc2e00349f5bdbee5890ccd6f17e0))
+
 ## [1.1.0](https://github.com/edycutjong/kitty/compare/v1.0.0...v1.1.0) (2026-07-09)
 
 
